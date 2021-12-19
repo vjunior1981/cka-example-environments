@@ -113,7 +113,8 @@ Well, this was a bit of a broad request :) First of all there should probably ne
 We could try to run one of the containers on a different port but this would require to add and alter the default configuration.
 
 ### Clean up
-Run: `./down.sh`
+**Run**: `./down.sh`
+
 </details>
 
 ---
@@ -231,7 +232,7 @@ Logs are not available because the container didn’t even get started. Describe
 
 ### Clean up
 
-Run: `./down.sh`
+**Run**: `./down.sh`
 
 </details>
 
@@ -383,7 +384,7 @@ Now all 3 are running on the master node.
 
 ### Clean up
 
-Run: `./down.sh`
+**Run**: `./down.sh`
 
 </details>
 
@@ -549,6 +550,10 @@ k get node
 ```
 
 Wonderful.
+
+### Clean up
+**Run**: `./down.sh`
+
 </details>
 
 ---
@@ -682,6 +687,10 @@ Wait a minute or two for the api-server to be back up and ready, then:
 ```bash
 k get node,pod # should be back to normal!
 ```
+
+### Clean up
+**Run**: `./down.sh`
+
 
 </details>
 
@@ -836,6 +845,9 @@ We will see the `not-so-important` pod gets terminated where the `very-much-so-i
 
 Awesome, hands-on pod priority experience!
 
+### Clean up
+**Run**: `./down.sh`
+
 </details>
 
 ---
@@ -889,5 +901,8 @@ k auth can-i delete secrets/compute-secret --as deploy@test.com # no
 **End**
 
 RBAC is a complex topic! It might be a good idea to start in simple reproducible steps to dive into it.
+
+### Clean up
+**Run**: `./down.sh`
 
 </details>
