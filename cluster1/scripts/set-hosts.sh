@@ -8,7 +8,12 @@
 #sed -e '/^.*ubuntu-bionic.*/d' -i /etc/hosts
 
 # Update /etc/hosts about other hosts
+echo
+echo
+echo "[*] Running set-hosts.sh"
+echo
+
 cat >> /etc/hosts <<EOF
-192.168.101.101  cluster1-master1
-192.168.101.201  cluster1-worker1
+192.168.56.101  cluster1-master1
+192.168.56.201  cluster1-worker1
 EOF

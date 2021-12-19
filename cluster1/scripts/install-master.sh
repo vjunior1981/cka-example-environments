@@ -1,9 +1,15 @@
 #!/bin/sh
+echo
+echo
+echo "[*] Running install-master.sh"
+echo
+
 apt-get update
 apt-get install -y etcd-client
 
 kubeadm reset -f
-kubeadm init --kubernetes-version=1.18.2 --apiserver-advertise-address=$MASTER_IP --pod-network-cidr=$POD_NW_CIDR
+export KUBEADM_VERSION=1.22.2
+kubeadm init --kubernetes-version=${KUBEADM_VERSION} --apiserver-advertise-address=$MASTER_IP --pod-network-cidr=$POD_NW_CIDR
 kubeadm token create --print-join-command --ttl 0 > /vagrant/tmp/master-join-command.sh
 
 mkdir -p $HOME/.kube

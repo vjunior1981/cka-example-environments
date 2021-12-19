@@ -2,16 +2,29 @@
 
 # Source: http://kubernetes.io/docs/getting-started-guides/kubeadm/
 
-apt-get remove -y docker.io kubelet kubeadm kubectl kubernetes-cni
+echo
+echo
+echo "[*] Running install-kube.sh"
+echo
+
+for i in docker.io kubelet kubeadm kubectl kubernetes-cni; do
+  if apt -qq list $i | grep -qs installed; then
+    apt remove -y $i
+  fi
+done
+# apt-get remove -y docker.io kubelet kubeadm kubectl kubernetes-cni
 apt-get autoremove -y
 systemctl daemon-reload
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
+swapoff -a
 apt-get update
-apt-get install -y docker.io kubelet=1.18.2-00 kubeadm=1.18.2-00 kubectl=1.18.2-00 kubernetes-cni
-cat > /etc/docker/daemon.json <<EOF
+export KUBE_VERSION=1.22.2-00
+apt-get install -y docker.io kubelet=${KUBE_VERSION} kubeadm=${KUBE_VERSION} kubectl=${KUBE_VERSION} kubernetes-cni
+apt-mark hold kubelet kubeadm kubectl
+cat >/etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
   "log-driver": "json-file",
